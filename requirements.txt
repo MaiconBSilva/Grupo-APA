@@ -1,0 +1,3 @@
+# Dependências opcionais para geração de gráficos estatísticos e relatórios
+matplotlib>=3.7.0
+
