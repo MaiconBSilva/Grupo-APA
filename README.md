@@ -16,10 +16,10 @@
 
 ## 👥 Integrantes do Grupo
 
-1. Maicon Brendo da Silva
-2. Pedro Lucas Barbosa Guedes
-3. Rodrigo Yuji Okida Tamoto
-4. Victor Hugo Silva Ferreira
+1. Maicon Brendo da Silva — Matrícula: `202204199` (**Integrante 3**)
+2. Pedro Lucas Barbosa Guedes — Matrícula: `202305533` (**Integrante 2**)
+3. Rodrigo Yuji Okida Tamoto — Matrícula: `201811626` (**Integrante 1**)
+4. Victor Hugo Silva Ferreira — Matrícula: `202304809` (**Integrante 4**)
 
 ---
 
@@ -30,10 +30,10 @@
 | **Guia Geral da Equipe** | Playbook com regras de governança, GitFlow, aprovação obrigatória de PRs e justificativa detalhada da divisão de trabalho. | [Guia-Geral-Equipe.md](file:///Guias/Guia-Geral-Equipe.md) |
 | **Contrato de Regras Técnicas** | Especificações de código em Python 3, assinaturas das funções, tipos de dados e padrões de contagem de operações. | [Contrato-de-Regras.md](file:///Guias/Contrato-de-Regras.md) |
 | **Dossiê Teórico do TSP** | Formalização matemática, prova formal de que o TSP é NP-Completo, justificativa de inviabilidade de D&C e descrição dos 6 paradigmas. | [Explicacao-Problema-TSP.md](file:///Guias/Explicacao-Problema-TSP.md) |
-| **Guia — Integrante 1** | Roteiro passo a passo e checklist de commits para **Força Bruta** e **Demonstração de NP-Completude**. | [Guia-Integrante-1.md](file:///Guias/Guia-Integrante-1.md) |
-| **Guia — Integrante 2** | Roteiro passo a passo e checklist de commits para **Backtracking com Branch & Bound** e **Análise de Podas**. | [Guia-Integrante-2.md](file:///Guias/Guia-Integrante-2.md) |
-| **Guia — Integrante 3** | Roteiro passo a passo e checklist de commits para **Programação Dinâmica (Held-Karp)** e **Inviabilidade de D&C**. | [Guia-Integrante-3.md](file:///Guias/Guia-Integrante-3.md) |
-| **Guia — Integrante 4** | Roteiro passo a passo e checklist de commits para **Gulosos**, **2-Aproximado (MST)** e **Heurística 2-Opt**. | [Guia-Integrante-4.md](file:///Guias/Guia-Integrante-4.md) |
+| **Guia — Integrante 1 (Rodrigo)** | Roteiro passo a passo e checklist de commits para **Força Bruta** e **Demonstração de NP-Completude**. | [Guia-Integrante-1.md](file:///Guias/Guia-Integrante-1.md) |
+| **Guia — Integrante 2 (Pedro)** | Roteiro passo a passo e checklist de commits para **Backtracking com Branch & Bound** e **Análise de Podas**. | [Guia-Integrante-2.md](file:///Guias/Guia-Integrante-2.md) |
+| **Guia — Integrante 3 (Maicon)** | Roteiro passo a passo e checklist de commits para **Programação Dinâmica (Held-Karp)** e **Inviabilidade de D&C**. | [Guia-Integrante-3.md](file:///Guias/Guia-Integrante-3.md) |
+| **Guia — Integrante 4 (Victor)** | Roteiro passo a passo e checklist de commits para **Gulosos**, **2-Aproximado (MST)** e **Heurística 2-Opt**. | [Guia-Integrante-4.md](file:///Guias/Guia-Integrante-4.md) |
 | **Edital Oficial** | Requisitos oficiais, critérios de avaliação e ementa completa fornecida pelo professor. | [Trabalho-Final.md](file:///Guias/Trabalho-Final.md) |
 
 ---
@@ -42,10 +42,10 @@
 
 | Integrante | Código Prático (Python 3) | Parte Teórica e Relatório | Branch Pessoal |
 | :--- | :--- | :--- | :--- |
-| **Integrante 1** | Força Bruta ($O(n!)$) | Introdução e Prova Formal NP-Completo | `feat/integrante-1-forca-bruta` |
-| **Integrante 2** | Backtracking com Branch & Bound | Fundamentação de Busca e Eficácia das Podas | `feat/integrante-2-backtracking` |
-| **Integrante 3** | Programação Dinâmica (Held-Karp com bitmask) | Justificativa Formal da Inviabilidade de D&C | `feat/integrante-3-prog-dinamica` |
-| **Integrante 4** | Vizinho Mais Próximo e 2-Aproximado (MST) + 2-Opt | Teoria de Heurísticas e Prova do Fator $\alpha \le 2$ | `feat/integrante-4-aproximados` |
+| **Integrante 1 — Rodrigo Yuji Okida Tamoto** | Força Bruta ($O(n!)$) | Introdução e Prova Formal NP-Completo | `feat/integrante-1-forca-bruta` |
+| **Integrante 2 — Pedro Lucas Barbosa Guedes** | Backtracking com Branch & Bound | Fundamentação de Busca e Eficácia das Podas | `feat/integrante-2-backtracking` |
+| **Integrante 3 — Maicon Brendo da Silva** | Programação Dinâmica (Held-Karp com bitmask) | Justificativa Formal da Inviabilidade de D&C | `feat/integrante-3-prog-dinamica` |
+| **Integrante 4 — Victor Hugo Silva Ferreira** | Vizinho Mais Próximo e 2-Aproximado (MST) + 2-Opt | Teoria de Heurísticas e Prova do Fator $\alpha \le 2$ | `feat/integrante-4-aproximados` |
 
 > *A fundamentação completa do equilíbrio de carga e compensação entre esforço algorítmico e densidade teórica está detalhada na Seção 4 do [Guia Geral da Equipe](file:///Guias/Guia-Geral-Equipe.md).*
 

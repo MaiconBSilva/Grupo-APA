@@ -1,6 +1,6 @@
 # 5. Estratégia 4: Programação Dinâmica (Algoritmo de Bellman-Held-Karp)
 
-**Responsável:** Integrante 3  
+**Responsável:** Integrante 3 — Maicon Brendo da Silva (Matrícula: `202204199`)  
 **Status:** Aguardando preenchimento
 
 ---

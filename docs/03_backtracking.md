@@ -1,6 +1,6 @@
 # 3. Estratégia 2: Backtracking com Branch & Bound
 
-**Responsável:** Integrante 2  
+**Responsável:** Integrante 2 — Pedro Lucas Barbosa Guedes (Matrícula: `202305533`)  
 **Status:** Aguardando preenchimento
 
 ---

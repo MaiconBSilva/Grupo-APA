@@ -1,6 +1,6 @@
 # 1. Identificação, Introdução e Prova Formal de NP-Completude
 
-**Responsável:** Integrante 1  
+**Responsável:** Integrante 1 — Rodrigo Yuji Okida Tamoto (Matrícula: `201811626`)  
 **Status:** Aguardando preenchimento
 
 ---
@@ -8,10 +8,10 @@
 ## 1.1. Identificação dos Autores
 *(Nomes completos em ordem alfabética seguidos do número de matrícula — Requisito 43)*
 
-1. Maicon Brendo da Silva — Matrícula: `[Inserir]`
-2. Pedro Lucas Barbosa Guedes — Matrícula: `[Inserir]`
-3. Rodrigo Yuji Okida Tamoto — Matrícula: `[Inserir]`
-4. Victor Hugo Silva Ferreira — Matrícula: `[Inserir]`
+1. Maicon Brendo da Silva — Matrícula: `202204199`
+2. Pedro Lucas Barbosa Guedes — Matrícula: `202305533`
+3. Rodrigo Yuji Okida Tamoto — Matrícula: `201811626`
+4. Victor Hugo Silva Ferreira — Matrícula: `202304809`
 
 ---
 

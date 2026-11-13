@@ -1,6 +1,6 @@
 # 4. Estratégia 3: Justificativa Formal da Inviabilidade de Divisão e Conquista
 
-**Responsável:** Integrante 3  
+**Responsável:** Integrante 3 — Maicon Brendo da Silva (Matrícula: `202204199`)  
 **Status:** Aguardando preenchimento
 
 ---

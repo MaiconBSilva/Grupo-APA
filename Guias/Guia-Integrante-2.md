@@ -1,5 +1,6 @@
 # Guia de Execução — Integrante 2
 
+**Responsável:** Pedro Lucas Barbosa Guedes (Matrícula: `202305533`)  
 **Papel:** Backtracking com Branch & Bound & Análise de Árvore de Busca  
 **Branch de Trabalho:** `feat/integrante-2-backtracking`  
 **Pasta de Código Exclusiva:** `src/backtracking/`  

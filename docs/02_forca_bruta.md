@@ -1,6 +1,6 @@
 # 2. Estratégia 1: Força Bruta
 
-**Responsável:** Integrante 1  
+**Responsável:** Integrante 1 — Rodrigo Yuji Okida Tamoto (Matrícula: `201811626`)  
 **Status:** Aguardando preenchimento
 
 ---

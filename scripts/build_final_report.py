@@ -33,10 +33,10 @@ def build_final_report():
 title: "Trabalho Final de Análise e Projeto de Algoritmos"
 subtitle: "Implementação e Análise de Estratégias para o Problema do Caixeiro Viajante (TSP)"
 author:
-  - "Maicon Brendo da Silva"
-  - "Pedro Lucas Barbosa Guedes"
-  - "Rodrigo Yuji Okida Tamoto"
-  - "Victor Hugo Silva Ferreira"
+  - "Maicon Brendo da Silva (202204199)"
+  - "Pedro Lucas Barbosa Guedes (202305533)"
+  - "Rodrigo Yuji Okida Tamoto (201811626)"
+  - "Victor Hugo Silva Ferreira (202304809)"
 date: "Novembro de 2026"
 geometry: "margin=2.5cm"
 output: pdf_document

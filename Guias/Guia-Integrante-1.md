@@ -1,5 +1,6 @@
 # Guia de Execução — Integrante 1
 
+**Responsável:** Rodrigo Yuji Okida Tamoto (Matrícula: `201811626`)  
 **Papel:** Força Bruta & Demonstração Formal de NP-Completude  
 **Branch de Trabalho:** `feat/integrante-1-forca-bruta`  
 **Pasta de Código Exclusiva:** `src/forca_bruta/`  

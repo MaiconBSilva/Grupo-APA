@@ -25,13 +25,10 @@
 
 | Papel no Projeto | Integrante Designado | Matrícula | Branch Pessoal de Trabalho |
 | :--- | :--- | :--- | :--- |
-| **Integrante 1** | *[A definir pelo grupo]* | *[Matrícula]* | `feat/integrante-1-forca-bruta` |
-| **Integrante 2** | *[A definir pelo grupo]* | *[Matrícula]* | `feat/integrante-2-backtracking` |
-| **Integrante 3** | *[A definir pelo grupo]* | *[Matrícula]* | `feat/integrante-3-prog-dinamica` |
-| **Integrante 4** | *[A definir pelo grupo]* | *[Matrícula]* | `feat/integrante-4-aproximados` |
-
-> **Lista de Alunos do Grupo:** Maicon Brendo da Silva, Pedro Lucas Barbosa Guedes, Rodrigo Yuji Okida Tamoto, Victor Hugo Silva Ferreira.  
-> *Assim que o grupo acordar quem assume cada número, basta preencher a tabela acima.*
+| **Integrante 1** | Rodrigo Yuji Okida Tamoto | `201811626` | `feat/integrante-1-forca-bruta` |
+| **Integrante 2** | Pedro Lucas Barbosa Guedes | `202305533` | `feat/integrante-2-backtracking` |
+| **Integrante 3** | Maicon Brendo da Silva | `202204199` | `feat/integrante-3-prog-dinamica` |
+| **Integrante 4** | Victor Hugo Silva Ferreira | `202304809` | `feat/integrante-4-aproximados` |
 
 ---
 

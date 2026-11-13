@@ -1,6 +1,6 @@
 # 6. Estratégias 5 e 6: Algoritmos Gulosos, Aproximados e Heurísticas
 
-**Responsável:** Integrante 4  
+**Responsável:** Integrante 4 — Victor Hugo Silva Ferreira (Matrícula: `202304809`)  
 **Status:** Aguardando preenchimento
 
 ---

@@ -1,5 +1,6 @@
 # Guia de Execução — Integrante 4
 
+**Responsável:** Victor Hugo Silva Ferreira (Matrícula: `202304809`)  
 **Papel:** Algoritmos Gulosos, Aproximados (2-Aproximação via MST) & Heurística 2-Opt  
 **Branch de Trabalho:** `feat/integrante-4-aproximados`  
 **Pasta de Código Exclusiva:** `src/aproximados/`  

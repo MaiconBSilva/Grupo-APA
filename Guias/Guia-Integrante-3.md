@@ -1,5 +1,6 @@
 # Guia de Execução — Integrante 3
 
+**Responsável:** Maicon Brendo da Silva (Matrícula: `202204199`)  
 **Papel:** Programação Dinâmica (Held-Karp) & Inviabilidade de Divisão e Conquista  
 **Branch de Trabalho:** `feat/integrante-3-prog-dinamica`  
 **Pasta de Código Exclusiva:** `src/dinamica/`  
