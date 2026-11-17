@@ -1,32 +1,48 @@
-"""
-Implementação do Algoritmo de Força Bruta para o Problema do Caixeiro Viajante (TSP).
-Responsável: Integrante 1
-Complexidade Teórica: Tempo O(n * n!), Espaço O(n).
-"""
+"""Solução exata do TSP por enumeração de permutações."""
 
 import time
+from itertools import permutations
+
 from src.core.tsp_types import TSPInstance, TSPResult, compute_tour_cost
 
 
 def solve(instance: TSPInstance) -> TSPResult:
-    """
-    Resolve o TSP utilizando Força Bruta com geração exaustiva de permutações.
+    """Encontra um ciclo de custo mínimo com origem na cidade 0.
 
-    Fixa a cidade 0 como origem/destino para evitar rotações cíclicas redundantes.
-    Avalia (n-1)! permutações possíveis e identifica o ciclo de menor custo total.
+    Args:
+        instance: Instância com pelo menos uma cidade e matriz de custos finitos.
 
-    Retorna:
-        TSPResult: Resultado padronizado contendo melhor rota, custo, tempo e operações.
+    Returns:
+        Rota ótima, custo no padrão do repositório, tempo e número de rotas.
+
+    Raises:
+        ValueError: Se a instância não tiver cidades.
+
+    Complexity:
+        Tempo Θ(n!) e espaço auxiliar Θ(n).
     """
     start_time = time.perf_counter()
     n = instance.dimension
+    if n < 1:
+        raise ValueError("A instância deve ter pelo menos uma cidade.")
 
-    # TODO: Integrante 1 implementará a lógica de permutações e contagem aqui
-    # Este é um stub inicial que atende ao contrato de dados:
-    best_route = list(range(n)) + [0]
-    best_cost = compute_tour_cost(best_route, instance.distance_matrix)
+    matrix = instance.distance_matrix
+    best_route: list[int] = []
+    best_cost = float("inf")
     operations_count = 0
 
+    for order in permutations(range(1, n)):
+        route = [0, *order, 0]
+        cost = 0.0
+        for index in range(n):
+            cost += matrix[route[index]][route[index + 1]]
+        operations_count += 1
+
+        if cost < best_cost:
+            best_cost = cost
+            best_route = route
+
+    reported_cost = compute_tour_cost(best_route, matrix)
     elapsed_time = time.perf_counter() - start_time
 
     return TSPResult(
@@ -34,9 +50,8 @@ def solve(instance: TSPInstance) -> TSPResult:
         instance_name=instance.name,
         dimension=n,
         best_route=best_route,
-        best_cost=best_cost,
+        best_cost=reported_cost,
         execution_time_seconds=elapsed_time,
         operations_count=operations_count,
-        extra_metrics={"permutations_evaluated": operations_count}
+        extra_metrics={"permutations_evaluated": operations_count},
     )
-
