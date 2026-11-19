@@ -1,117 +1,107 @@
-# 2. Estratégia exata de força bruta
+# 1. Identificação, Introdução e Prova Formal de NP-Completude
 
-A força bruta resolve o Problema do Caixeiro Viajante (TSP) avaliando todas as ordens de visita possíveis e escolhendo a rota de menor custo. Por encontrar o ótimo para as instâncias em que a enumeração é viável, essa estratégia serve de referência para avaliar a qualidade das soluções aproximadas.
+**Responsável:** Integrante 1 — Rodrigo Yuji Okida Tamoto (Matrícula: `201811626`)  
+**Status:** Redigido para revisão
 
-## 2.1. Enumeração das rotas
+## 1.1. Identificação dos Autores
 
-A implementação fixa a cidade `0` como origem e destino. Essa escolha elimina as rotações de uma mesma sequência. Por exemplo, `0 → 1 → 2 → 3 → 0` e `2 → 3 → 0 → 1 → 2` descrevem o mesmo percurso, com pontos de partida diferentes.
+| Autor | Matrícula |
+| :--- | :--- |
+| Maicon Brendo da Silva | 202204199 |
+| Pedro Lucas Barbosa Guedes | 202305533 |
+| Rodrigo Yuji Okida Tamoto | 201811626 |
+| Victor Hugo Silva Ferreira | 202304809 |
 
-Para cada permutação das cidades restantes, o algoritmo:
+## 1.2. Introdução ao Problema do Caixeiro Viajante
 
-1. Acrescenta a cidade `0` no início e no fim da sequência.
-2. Soma os custos das arestas consecutivas, incluindo a volta à origem.
-3. Incrementa o contador de rotas avaliadas.
-4. Atualiza a melhor rota quando encontra um custo estritamente menor.
+O Problema do Caixeiro Viajante (*Traveling Salesperson Problem*, TSP) consiste em encontrar uma rota fechada de menor custo que visite cada cidade exatamente uma vez antes do retorno à origem. Ele permite estudar o crescimento combinatório do espaço de soluções e comparar estratégias exatas e aproximadas de projeto de algoritmos [1, 2].
 
-Em caso de empate, mantém a primeira rota encontrada. Em instâncias simétricas, o algoritmo ainda avalia os dois sentidos de cada ciclo. Assim, a contagem de operações segue o padrão do grupo de uma avaliação para cada uma das $(n-1)!$ permutações.
+### Modelagem matemática
 
-## 2.2. Correção do algoritmo
+Representamos as cidades por $V=\{0,\ldots,n-1\}$ e as ligações por um grafo completo não direcionado $K_n$, com $n\geq3$. Cada aresta tem um peso não negativo $w(u,v)=w(v,u)$ que representa distância, tempo ou outro custo. Uma permutação $\pi=(\pi_0,\ldots,\pi_{n-1})$ de $V$ determina um ciclo de custo
 
-Todo ciclo que visita as $n$ cidades pode ser representado a partir da cidade `0`. Ao fixar esse ponto de partida, a ordem das outras $n-1$ cidades corresponde a uma das permutações geradas. Portanto, a enumeração inclui uma representação de todo ciclo admissível.
+$$
+C(\pi)=\sum_{i=0}^{n-1}w\bigl(\pi_i,\pi_{(i+1)\bmod n}\bigr).
+$$
 
-Após avaliar a primeira rota, ela é a melhor entre as rotas examinadas. A cada avaliação seguinte, o algoritmo mantém a melhor rota anterior ou a substitui por uma de custo menor. Desse modo, após examinar todas as permutações, a rota armazenada tem custo mínimo entre todos os ciclos admissíveis.
+O termo com índice $n-1$ inclui o retorno à primeira cidade. Na implementação, fixamos $\pi_0=0$, pois qualquer ciclo pode ser escrito a partir dessa cidade.
 
-## 2.3. Código-fonte
+Na **versão de otimização**, buscamos $\pi^*\in\operatorname{argmin}_{\pi}C(\pi)$. Na **versão de decisão**, recebemos também um limite $B$ e perguntamos se existe uma permutação com $C(\pi)\leq B$. A prova de NP-completude a seguir trata da versão de decisão [1, 4].
 
-A função `solve` recebe uma `TSPInstance` e devolve um `TSPResult`, conforme o contrato compartilhado do projeto. Os custos são comparados durante a busca antes do arredondamento padrão aplicado ao valor retornado.
+### Aplicações práticas
 
-```python
-"""Solução exata do TSP por enumeração de permutações."""
+Na distribuição de mercadorias, um modelo básico considera um veículo que parte do depósito, atende os destinos e retorna ao depósito. Os pesos podem representar as distâncias entre os locais. Restrições como capacidade do veículo e janelas de atendimento exigem formulações adicionais.
 
-import time
-from itertools import permutations
+Na fabricação de placas de circuito impresso, os vértices podem representar pontos de perfuração e o custo pode representar o deslocamento da ferramenta. O objetivo é reduzir o percurso necessário para visitar todos os pontos. Essas aplicações motivam a comparação entre o custo ótimo e soluções obtidas com menor esforço computacional [1, 4].
 
-from src.core.tsp_types import TSPInstance, TSPResult, compute_tour_cost
+## 1.3. Demonstração Formal de Pertencimento à Classe NP e NP-Completude
 
+Adotamos a formulação de decisão com pesos inteiros não negativos e limite $B$ codificados em binário. Pesos racionais representados por pares de inteiros também permitem verificação polinomial. Essa formulação explicita a representação finita usada na análise de complexidade [1, 4].
 
-def solve(instance: TSPInstance) -> TSPResult:
-    """Encontra um ciclo de custo mínimo com origem na cidade 0.
+### 1.3.1. Certificado e verificador polinomial
 
-    Args:
-        instance: Instância com pelo menos uma cidade e matriz de custos finitos.
+Um certificado é uma sequência de $n$ identificadores de vértices. Cada identificador ocupa $O(\log n)$ bits, de modo que o certificado tem tamanho $O(n\log n)$.
 
-    Returns:
-        Rota ótima, custo no padrão do repositório, tempo e número de rotas.
+O verificador realiza as seguintes etapas.
 
-    Raises:
-        ValueError: Se a instância não tiver cidades.
+1. Verifica se a sequência tem exatamente $n$ elementos.
+2. Confere se cada identificador está no intervalo $0,\ldots,n-1$ e aparece uma única vez, usando um vetor booleano de visitados.
+3. Soma os pesos das $n$ arestas consecutivas do ciclo, incluindo o retorno à origem.
+4. Aceita se, e somente se, a sequência for válida e a soma for menor ou igual a $B$.
 
-    Complexity:
-        Tempo Θ(n!) e espaço auxiliar Θ(n).
-    """
-    start_time = time.perf_counter()
-    n = instance.dimension
-    if n < 1:
-        raise ValueError("A instância deve ter pelo menos uma cidade.")
+Se o verificador aceita, o certificado representa uma rota válida que respeita o limite. Se existe uma rota que respeita o limite, sua sequência de vértices constitui um certificado aceito. Isso estabelece a correção do verificador.
 
-    matrix = instance.distance_matrix
-    best_route: list[int] = []
-    best_cost = float("inf")
-    operations_count = 0
+Com acesso direto à matriz e operações aritméticas de custo unitário, o verificador executa $O(n)$ operações e usa $O(n)$ posições auxiliares. Considerando pesos de até $L$ bits, a soma ocupa $O(L+\log n)$ bits. O processamento das somas e da comparação com $B$ continua polinomial no tamanho da entrada. Portanto,
 
-    for order in permutations(range(1, n)):
-        route = [0, *order, 0]
-        cost = 0.0
-        for index in range(n):
-            cost += matrix[route[index]][route[index + 1]]
-        operations_count += 1
+$$
+\mathrm{TSP}_{\mathrm{dec}}\in\mathrm{NP}.
+$$
 
-        if cost < best_cost:
-            best_cost = cost
-            best_route = route
+A distinção entre encontrar uma solução e verificar um certificado fundamenta a definição de NP [1, 2, 4].
 
-    reported_cost = compute_tour_cost(best_route, matrix)
-    elapsed_time = time.perf_counter() - start_time
+### 1.3.2. Redução polinomial de Ciclo Hamiltoniano
 
-    return TSPResult(
-        algorithm_name="Forca_Bruta",
-        instance_name=instance.name,
-        dimension=n,
-        best_route=best_route,
-        best_cost=reported_cost,
-        execution_time_seconds=elapsed_time,
-        operations_count=operations_count,
-        extra_metrics={"permutations_evaluated": operations_count},
-    )
-```
+Usamos o problema de **Ciclo Hamiltoniano em grafos simples não direcionados**, que é NP-completo [1, 4]. Dado um grafo $G=(V,E)$ com $n\geq3$, construímos uma instância de TSP no grafo completo com o mesmo conjunto de vértices. Para vértices distintos, definimos
 
-## 2.4. Análise de complexidade
+$$
+w(u,v)=
+\begin{cases}
+1, & \text{se }\{u,v\}\in E,\\
+2, & \text{se }\{u,v\}\notin E,
+\end{cases}
+\qquad B=n.
+$$
 
-| Medida | Complexidade | Justificativa |
-| :--- | :--- | :--- |
-| Rotas avaliadas | $(n-1)!$ | Cada permutação das cidades restantes gera uma rota completa. |
-| Acessos à matriz na enumeração | $n\cdot(n-1)!=n!$ | O cálculo do custo examina as $n$ arestas de cada rota. |
-| Tempo de execução | $\Theta(n!)$ | Montar e avaliar uma candidata custa $\Theta(n)$, repetido para cada permutação. |
-| Espaço auxiliar | $\Theta(n)$ | O gerador produz uma permutação por vez. A permutação atual, a rota candidata e a melhor rota têm tamanho linear. |
-| Espaço da entrada | $\Theta(n^2)$ | A matriz armazena os custos entre todos os pares de cidades. |
+A construção produz uma matriz simétrica. Depois de representar a adjacência do grafo, preenchemos a matriz em $O(n^2)$ tempo. Cada peso ocupa tamanho constante e $B$ ocupa $O(\log n)$ bits, portanto a transformação tem tamanho e tempo polinomiais [1, 4].
 
-A operação fundamental registrada em `operations_count` é **uma avaliação de rota completa**. Ao final da busca, o utilitário compartilhado recalcula o custo da rota escolhida em $\Theta(n)$ para reportá-lo no formato do projeto. Essa etapa preserva a complexidade total de $\Theta(n!)$.
+### 1.3.3. Equivalência das respostas
 
-## 2.5. Validação e resultados experimentais
+**Se $G$ possui um ciclo hamiltoniano, a instância construída de TSP possui uma rota com custo até $B$.**
 
-O teste verifica se a rota começa e termina na cidade `0`, se contém todas as cidades exatamente uma vez antes do retorno, se seu custo coincide com o ótimo de referência e se o número de rotas avaliadas é igual a $(n-1)!$.
+O ciclo visita cada vértice uma vez e utiliza $n$ arestas de $E$. Cada uma recebe peso 1. Sua rota correspondente tem custo $n=B$.
 
-Para cada instância, o teste executa o algoritmo cinco vezes e registra a mediana dos tempos obtidos com `time.perf_counter()`. O carregamento dos arquivos JSON ocorre antes da medição.
+**Se a instância construída de TSP possui uma rota com custo até $B$, o grafo $G$ possui um ciclo hamiltoniano.**
 
-| Instância | Cidades ($n$) | Custo ótimo de referência | Tempo mediano (s) | Rotas avaliadas |
-| :--- | ---: | ---: | ---: | ---: |
-| `tiny_4` | 4 | 226,30 | A medir | 6 |
-| `small_6` | 6 | 147,14 | A medir | 120 |
-| `small_8` | 8 | 277,32 | A medir | 5.040 |
-| `medium_10` | 10 | 312,11 | A medir | 362.880 |
+Uma rota contém $n$ arestas e cada uma tem peso pelo menos 1. Se alguma tivesse peso 2, o custo total seria pelo menos $(n-1)+2=n+1>B$. Logo, todas as arestas da rota têm peso 1 e pertencem a $E$. A mesma sequência forma um ciclo hamiltoniano no grafo original.
 
-### Crescimento do espaço de busca
+Assim,
 
-De 8 para 10 cidades, o número de rotas passa de 5.040 para 362.880, um aumento de **72 vezes**. Para 12 cidades, a enumeração exigiria $11! = 39.916.800$ rotas, **110 vezes** a contagem para 10 cidades. Além do aumento na quantidade de rotas, cada rota com 12 cidades exige somar mais arestas.
+$$
+G\in\mathrm{HAM\text{-}CYCLE}
+\iff
+f(G)\in\mathrm{TSP}_{\mathrm{dec}},
+$$
 
-O benchmark comparativo do grupo limita a execução da força bruta a instâncias com até 10 cidades. Nesse intervalo, o custo ótimo calculado permite medir quanto as soluções aproximadas se afastam do ótimo na mesma instância.
+e a construção polinomial demonstra
+
+$$
+\mathrm{HAM\text{-}CYCLE}\leq_p\mathrm{TSP}_{\mathrm{dec}}.
+$$
+
+### 1.3.4. Classificação do problema
+
+A redução prova que a versão de decisão do TSP é NP-difícil. Como essa versão também pertence a NP, concluímos que ela é **NP-completa** [1, 4].
+
+A versão de otimização é **NP-difícil**. Um algoritmo que encontrasse seu custo ótimo em tempo polinomial também resolveria a decisão em tempo polinomial, bastando comparar o ótimo com $B$. A classificação de NP-completude fundamenta a discussão do esforço de busca. Ela preserva em aberto a existência de um algoritmo polinomial para o caso geral, questão relacionada a $P=NP$ [1, 4].
+
+As referências [1], [2] e [4] correspondem às entradas da Seção 8.2 do relatório.

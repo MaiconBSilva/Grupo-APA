@@ -1,6 +1,9 @@
 # 2. Estratégia exata de força bruta
 
-A força bruta resolve o Problema do Caixeiro Viajante (TSP) avaliando todas as ordens de visita possíveis e escolhendo a rota de menor custo. Por encontrar o ótimo para as instâncias em que a enumeração é viável, essa estratégia serve de referência para avaliar a qualidade das soluções aproximadas.
+**Responsável:** Integrante 1 — Rodrigo Yuji Okida Tamoto (Matrícula: `201811626`)  
+**Status:** Implementado e documentado para revisão
+
+A força bruta resolve o Problema do Caixeiro Viajante (TSP) avaliando todas as ordens de visita possíveis e escolhendo a rota de menor custo. Por encontrar o ótimo para as instâncias em que a enumeração é viável, essa estratégia serve de referência para avaliar a qualidade das soluções aproximadas. A enumeração exaustiva e a análise de crescimento assintótico seguem os fundamentos de projeto de algoritmos discutidos em [1, 2].
 
 ## 2.1. Enumeração das rotas
 
@@ -87,6 +90,8 @@ def solve(instance: TSPInstance) -> TSPResult:
 
 ## 2.4. Análise de complexidade
 
+A análise considera acessos à matriz e operações aritméticas de custo unitário, conforme o modelo de contagem de operações adotado no projeto [1, 2].
+
 | Medida | Complexidade | Justificativa |
 | :--- | :--- | :--- |
 | Rotas avaliadas | $(n-1)!$ | Cada permutação das cidades restantes gera uma rota completa. |
@@ -106,9 +111,15 @@ Para cada instância, o teste executa o algoritmo cinco vezes e registra a media
 | Instância | Cidades ($n$) | Custo ótimo | Tempo mediano (s) | Rotas avaliadas |
 | :--- | ---: | ---: | ---: | ---: |
 | `tiny_4` | 4 | 226,30 | 0,000005 | 6 |
-| `small_6` | 6 | 147,14 | 0,000054 | 120 |
-| `small_8` | 8 | 277,32 | 0,003472 | 5.040 |
-| `medium_10` | 10 | 312,11 | 0,240914 | 362.880 |
+| `small_6` | 6 | 147,14 | 0,000069 | 120 |
+| `small_8` | 8 | 277,32 | 0,003105 | 5.040 |
+| `medium_10` | 10 | 312,11 | 0,231922 | 362.880 |
+
+### Ambiente das medições
+
+A tabela apresenta uma nova coleta realizada na revisão do PR, executando diretamente o script de teste. O ambiente informou Windows, build 26200, CPython 3.11.2 e processador identificado como AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD. A quantidade de RAM instalada e o nome comercial do processador ficaram indisponíveis na consulta automatizada.
+
+Cada linha representa a mediana de cinco execuções. As duas menores instâncias têm duração próxima da escala de microssegundos, tornando seus tempos particularmente sensíveis à resolução da medição e à atividade concorrente do sistema. Os tempos refletem este ambiente de execução e podem variar entre máquinas ou novas coletas.
 
 ### Crescimento do espaço de busca
 
