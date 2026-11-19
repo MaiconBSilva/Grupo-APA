@@ -117,7 +117,7 @@ Para cada instância, o teste executa o algoritmo cinco vezes e registra a media
 
 ### Ambiente das medições
 
-A tabela apresenta uma nova coleta realizada na revisão do PR, executando diretamente o script de teste. O ambiente informou Windows, build 26200, CPython 3.11.2 e processador identificado como AMD64 Family 25 Model 33 Stepping 2, AuthenticAMD. A quantidade de RAM instalada e o nome comercial do processador ficaram indisponíveis na consulta automatizada.
+A tabela apresenta uma nova coleta realizada na revisão do PR, executando diretamente o script de teste. O computador utilizado possui processador AMD Ryzen 5 5600X, com 6 núcleos e 12 threads, e 16 GB de memória RAM DDR4 em dual channel (2 × 8 GB), a 3200 MHz. O ambiente de execução utiliza Windows, build 26200, e CPython 3.11.2.
 
 Cada linha representa a mediana de cinco execuções. As duas menores instâncias têm duração próxima da escala de microssegundos, tornando seus tempos particularmente sensíveis à resolução da medição e à atividade concorrente do sistema. Os tempos refletem este ambiente de execução e podem variar entre máquinas ou novas coletas.
 
