@@ -19,11 +19,40 @@ def solve(instance: TSPInstance) -> TSPResult:
     """
     start_time = time.perf_counter()
     n = instance.dimension
+    dist = instance.distance_matrix
+    best_route = [0] if n > 0 else []
+    visited = [False] * n
+    if n > 0:
+        visited[0] = True
 
-    # TODO: Integrante 4 implementará a escolha gulosa do vizinho mais próximo aqui
-    best_route = list(range(n)) + [0]
-    best_cost = compute_tour_cost(best_route, instance.distance_matrix)
     comparisons_count = 0
+    current_city = 0
+
+    while len(best_route) < n:
+        nearest_city = None
+        nearest_distance = None
+
+        for candidate in range(n):
+            if visited[candidate]:
+                continue
+
+            distance = dist[current_city][candidate]
+            comparisons_count += 1
+            if nearest_distance is None or distance < nearest_distance:
+                nearest_city = candidate
+                nearest_distance = distance
+
+        if nearest_city is None:
+            raise ValueError("Não foi possível encontrar uma cidade não visitada.")
+
+        best_route.append(nearest_city)
+        visited[nearest_city] = True
+        current_city = nearest_city
+
+    if n > 0:
+        best_route.append(0)
+
+    best_cost = compute_tour_cost(best_route, instance.distance_matrix)
 
     elapsed_time = time.perf_counter() - start_time
 
