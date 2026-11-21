@@ -1,7 +1,7 @@
-# 2. Estratégia exata de força bruta
+# 2. Estratégia 1: Força Bruta Exaustiva
 
 **Responsável:** Integrante 1 — Rodrigo Yuji Okida Tamoto (Matrícula: `201811626`)  
-**Status:** Implementado e documentado para revisão
+**Status:** Concluído
 
 A força bruta resolve o Problema do Caixeiro Viajante (TSP) avaliando todas as ordens de visita possíveis e escolhendo a rota de menor custo. Por encontrar o ótimo para as instâncias em que a enumeração é viável, essa estratégia serve de referência para avaliar a qualidade das soluções aproximadas. A enumeração exaustiva e a análise de crescimento assintótico seguem os fundamentos de projeto de algoritmos discutidos em [1, 2].
 

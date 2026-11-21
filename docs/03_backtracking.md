@@ -11,14 +11,14 @@ O Backtracking com Branch & Bound encontra a rota ótima do Problema do Caixeiro
 
 ## 3.1. Descrição do Paradigma e Espaço de Estados
 
-O **backtracking** é uma busca em profundidade que constrói uma solução por etapas. A cada etapa, escolhe uma opção, avança e, ao esgotar as possibilidades daquele ramo, desfaz a escolha e tenta a próxima `[2]`. As escolhas possíveis formam uma **árvore de estados**:
+O **backtracking** é uma busca em profundidade que constrói uma solução por etapas. A cada etapa, escolhe uma opção, avança e, ao esgotar as possibilidades daquele ramo, desfaz a escolha e tenta a próxima [2]. As escolhas possíveis formam uma **árvore de estados**:
 
 - A **raiz** é o caminho que contém só a cidade `0`, a origem fixa (a mesma convenção da Força Bruta).
 - Um **nó de profundidade $k$** é um caminho $0 \to c_1 \to \dots \to c_k$ com $k$ cidades distintas além da origem.
 - Os **filhos** de um nó acrescentam ao fim do caminho uma cidade ainda não visitada.
 - As **folhas**, na profundidade $n-1$, são as $(n-1)!$ rotas completas. O custo de cada uma inclui a volta à cidade `0`.
 
-Sem poda, o backtracking percorre a árvore inteira e examina as mesmas $(n-1)!$ rotas da Força Bruta. O **Branch & Bound** (ramificação e poda) acrescenta dois elementos à busca `[7, 8]`:
+Sem poda, o backtracking percorre a árvore inteira e examina as mesmas $(n-1)!$ rotas da Força Bruta. O **Branch & Bound** (ramificação e poda) acrescenta dois elementos à busca [7, 8]:
 
 1. **Incumbente:** o custo $U$ da melhor rota completa encontrada até o momento. No início, $U = +\infty$.
 2. **Cota inferior** $LB(P)$: um valor que nunca excede o custo de qualquer rota que complete o caminho parcial $P$.
@@ -420,12 +420,12 @@ Antes dos experimentos, o script confere a correção do algoritmo:
 
 | Instância | $n$ | Custo Ótimo | Nós Expandidos | Podas Realizadas | $(n-1)!$ | Nós da árvore sem poda | Tempo (s) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| `tiny_4` | 4 | 226.30 | 8 | 4 | 6 | 16 | 0.000015 |
-| `small_6` | 6 | 147.14 | 36 | 53 | 120 | 326 | 0.000078 |
-| `small_8` | 8 | 277.32 | 49 | 162 | 5.040 | 13.700 | 0.000234 |
-| `medium_10` | 10 | 312.11 | 1.186 | 3.619 | 362.880 | 986.410 | 0.006137 |
-| `medium_12` | 12 | 280.79 | 1.827 | 8.873 | 39.916.800 | 108.505.112 | 0.013359 |
-| `medium_16` | 16 | 368.30 | 166.139 | 982.818 | 1.307.674.368.000 | 3.554.627.472.076 | 1.732759 |
+| `tiny_4` | 4 | 226,30 | 8 | 4 | 6 | 16 | 0,000015 |
+| `small_6` | 6 | 147,14 | 36 | 53 | 120 | 326 | 0,000078 |
+| `small_8` | 8 | 277,32 | 49 | 162 | 5.040 | 13.700 | 0,000234 |
+| `medium_10` | 10 | 312,11 | 1.186 | 3.619 | 362.880 | 986.410 | 0,006137 |
+| `medium_12` | 12 | 280,79 | 1.827 | 8.873 | 39.916.800 | 108.505.112 | 0,013359 |
+| `medium_16` | 16 | 368,30 | 166.139 | 982.818 | 1.307.674.368.000 | 3.554.627.472.076 | 1,732759 |
 
 A fração da árvore que precisa ser expandida cai rapidamente com $n$: metade da árvore em `tiny_4`, 0,12% em `medium_10` e cerca de 1 nó em cada 21 milhões em `medium_16`. Em instâncias pequenas, a árvore é rasa e sobra pouco para podar. Conforme $n$ cresce, cada poda perto da raiz elimina uma subárvore de tamanho fatorial.
 
@@ -433,14 +433,14 @@ A fração da árvore que precisa ser expandida cai rapidamente com $n$: metade 
 
 | Instância | $n$ | Cota | Nós Expandidos | Podas Realizadas | Tempo (s) |
 | :--- | :---: | :--- | :---: | :---: | :---: |
-| `small_8` | 8 | simples | 619 | 1.114 | 0.000483 |
-| `small_8` | 8 | refinada | 49 | 162 | 0.000201 |
-| `medium_10` | 10 | simples | 21.220 | 35.684 | 0.017726 |
-| `medium_10` | 10 | refinada | 1.186 | 3.619 | 0.005849 |
-| `medium_12` | 12 | simples | 26.324 | 91.933 | 0.032797 |
-| `medium_12` | 12 | refinada | 1.827 | 8.873 | 0.013395 |
-| `medium_16` | 16 | simples | 6.284.091 | 26.349.458 | 9.686351 |
-| `medium_16` | 16 | refinada | 166.139 | 982.818 | 1.817531 |
+| `small_8` | 8 | simples | 619 | 1.114 | 0,000483 |
+| `small_8` | 8 | refinada | 49 | 162 | 0,000201 |
+| `medium_10` | 10 | simples | 21.220 | 35.684 | 0,017726 |
+| `medium_10` | 10 | refinada | 1.186 | 3.619 | 0,005849 |
+| `medium_12` | 12 | simples | 26.324 | 91.933 | 0,032797 |
+| `medium_12` | 12 | refinada | 1.827 | 8.873 | 0,013395 |
+| `medium_16` | 16 | simples | 6.284.091 | 26.349.458 | 9,686351 |
+| `medium_16` | 16 | refinada | 166.139 | 982.818 | 1,817531 |
 
 As duas cotas encontram o mesmo ótimo. A refinada expande 12,6, 17,9, 14,4 e 37,8 vezes menos nós em `small_8`, `medium_10`, `medium_12` e `medium_16`. Como ela custa mais por nó, o ganho de tempo é menor que o de nós, mas ainda chega a 5,3 vezes em `medium_16`. A diferença vem das duas informações que a cota simples ignora: a aresta que ainda sai da cidade atual e o fato de que as arestas restantes não podem voltar a cidades já visitadas.
 
@@ -454,7 +454,7 @@ Na mesma máquina, a Força Bruta do Capítulo 2 avaliou as $9! = 362.880$ rotas
 | 16 | $15! \approx 1{,}3 \times 10^{12}$ | ≈ 12 dias | 1,7 s |
 | 20 | $19! \approx 1{,}2 \times 10^{17}$ | ≈ 3.700 anos | ≈ 27 s |
 
-Em `medium_20`, fora da tabela principal, o Branch & Bound expandiu 1.437.257 nós, fez 12.552.793 podas e encontrou o custo 379.34, o mesmo do Held-Karp, em cerca de 27 s. O script comparativo do grupo (`scripts/run_comparison.py`) limita o Branch & Bound a $n \le 16$ para manter o tempo total baixo.
+Em `medium_20`, fora da tabela principal, o Branch & Bound expandiu 1.437.257 nós, fez 12.552.793 podas e encontrou o custo 379,34, o mesmo do Held-Karp, em cerca de 27 s. O script comparativo do grupo (`scripts/run_comparison.py`) limita o Branch & Bound a $n \le 16$ para manter o tempo total baixo.
 
 ### Análise qualitativa
 
@@ -462,10 +462,4 @@ O Branch & Bound continua exponencial no pior caso, mas o pior caso depende da i
 
 Em relação ao Held-Karp, o Branch & Bound foi mais lento em `medium_16` (cerca de 1,7 s contra 0,3 s na mesma máquina), porque o número de nós depende da qualidade das podas e não tem garantia além de $O((n-1)!)$. Em troca, ele usa memória $O(n)$, enquanto o Held-Karp precisa de $\Theta(n \cdot 2^n)$ estados. Em instâncias em que a cota é justa, isso pode permitir resolver tamanhos em que o Held-Karp já esgota a memória. Em instâncias em que a cota é fraca, como no exemplo de custos iguais com a cota simples, o algoritmo se aproxima da Força Bruta.
 
----
-
-## 3.6. Referências
-
-- **[2]** ZIVIANI, N. *Projeto de Algoritmos com implementações em Java e C++*. São Paulo: Cengage Learning, 2006.
-- **[7]** LAND, A. H.; DOIG, A. G. An Automatic Method of Solving Discrete Programming Problems. *Econometrica*, v. 28, n. 3, p. 497–520, 1960.
-- **[8]** LITTLE, J. D. C.; MURTY, K. G.; SWEENEY, D. W.; KAREL, C. An Algorithm for the Traveling Salesman Problem. *Operations Research*, v. 11, n. 6, p. 972–989, 1963.
+As referências [2], [7] e [8] citadas neste capítulo encontram-se consolidadas na Seção 8.2 do relatório.

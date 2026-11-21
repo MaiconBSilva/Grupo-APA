@@ -54,7 +54,11 @@ def get_available_solvers():
 
 def main():
     instances_dir = REPO_ROOT / "data" / "instances"
-    instances_files = sorted(instances_dir.glob("*.json"), key=lambda p: int(p.stem.split("_")[1]) if "_" in p.stem else 0)
+    loaded_instances = [
+        (inst_path, load_instance_from_json(inst_path))
+        for inst_path in instances_dir.glob("*.json")
+    ]
+    loaded_instances.sort(key=lambda item: (item[1].dimension, item[1].name))
 
     solvers = get_available_solvers()
     print("=" * 80)
@@ -67,8 +71,7 @@ def main():
         print("Assim que cada integrante mergear sua branch com a implementação, este script executará os benchmarks automaticamente.")
         return
 
-    for inst_path in instances_files:
-        instance = load_instance_from_json(inst_path)
+    for _, instance in loaded_instances:
         print(f"\n--> Instância: {instance.name} (n = {instance.dimension})")
 
         for solver_name, (solve_fn, max_n) in solvers.items():

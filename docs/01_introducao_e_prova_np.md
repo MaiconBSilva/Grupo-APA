@@ -1,7 +1,7 @@
 # 1. Identificação, Introdução e Prova Formal de NP-Completude
 
 **Responsável:** Integrante 1 — Rodrigo Yuji Okida Tamoto (Matrícula: `201811626`)  
-**Status:** Redigido para revisão
+**Status:** Concluído
 
 ## 1.1. Identificação dos Autores
 

@@ -320,20 +320,18 @@ def solve(instance: TSPInstance) -> TSPResult:
 
 Os testes locais executaram `python -m src.aproximados.test_aproximados`, comparando Vizinho Mais Próximo e MST + 2-Opt nas instâncias pequenas, médias e grandes. Para $n \le 16$, o custo ótimo foi obtido pelo algoritmo exato de Held-Karp já implementado no projeto. Para $n=50$ e $n=100$, o ótimo não foi calculado; portanto, não se atribui desvio empírico nessas linhas.
 
-As medições abaixo são de uma execução em Windows 11 com Python 3.15.2. Os tempos variam conforme o equipamento, a carga do sistema e a execução. O desvio relativo foi calculado por $(C_{\text{heurística}} - C^*)/C^* \times 100$.
+As medições abaixo são de uma execução local em um computador com processador Intel Core i5-13600KF, 8 GB de memória RAM, Windows 11 e Python 3.14.7. Os tempos nos Capítulos 2 a 6 refletem as validações locais do ambiente de cada integrante; o benchmark comparativo global unificado em uma única máquina padrão encontra-se no Capítulo 7. O desvio relativo foi calculado por $(C_{\text{heurística}} - C^*)/C^* \times 100$.
 
 | Instância | $n$ | Vizinho Mais Próximo (custo / tempo) | Desvio NN | MST + 2-Opt (custo / tempo) | Ótimo Held-Karp (custo / tempo) | Desvio MST |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| `small_8` | 8 | 277.32 / 0.000017 s | 0.00% | 277.32 / 0.000026 s | 277.32 / 0.000141 s | 0.00% |
-| `medium_10` | 10 | 343.95 / 0.000016 s | 10.20% | 312.11 / 0.000029 s | 312.11 / 0.000853 s | 0.00% |
-| `medium_16` | 16 | 417.49 / 0.000013 s | 13.36% | 376.60 / 0.000044 s | 368.30 / 0.147528 s | 2.25% |
-| `large_50` | 50 | 701.24 / 0.000059 s | n/d | 647.77 / 0.001002 s | n/d | n/d |
-| `large_100` | 100 | 966.34 / 0.000209 s | n/d | 877.98 / 0.009722 s | n/d | n/d |
+| `small_8` | 8 | 277,32 / 0,000017 s | 0,00% | 277,32 / 0,000026 s | 277,32 / 0,000141 s | 0,00% |
+| `medium_10` | 10 | 343,95 / 0,000016 s | 10,20% | 312,11 / 0,000029 s | 312,11 / 0,000853 s | 0,00% |
+| `medium_16` | 16 | 417,49 / 0,000013 s | 13,36% | 376,60 / 0,000044 s | 368,30 / 0,147528 s | 2,25% |
+| `large_50` | 50 | 701,24 / 0,000059 s | n/d | 647,77 / 0,001002 s | n/d | n/d |
+| `large_100` | 100 | 966,34 / 0,000209 s | n/d | 877,98 / 0,009722 s | n/d | n/d |
 
 Nas instâncias pequenas, o Held-Karp permite verificar que a rota MST + 2-Opt respeitou o limite teórico de fator 2: o desvio observado foi de $0\%$ em `small_8` e `medium_10`, e de aproximadamente $2{,}25\%$ em `medium_16`. O Vizinho Mais Próximo encontrou o ótimo em `small_8`, mas ficou $10{,}20\%$ acima em `medium_10` e $13{,}36\%$ acima em `medium_16`, ilustrando que sua escolha local não garante otimalidade.
 
 Nas instâncias maiores, ambas as heurísticas produziram rotas válidas rapidamente. Nesta execução, o MST + 2-Opt levou cerca de 1 ms em `large_50` e 9,7 ms em `large_100`; o Vizinho Mais Próximo levou menos de 0,3 ms em ambas. Como o ótimo não foi calculado para esses tamanhos, esses resultados demonstram custo e tempo observados, mas não constituem uma medição do desvio em relação ao ótimo.
 
-## Referências
-
-- **[1]** CORMEN, Thomas H.; LEISERSON, Charles E.; RIVEST, Ronald L.; STEIN, Clifford. *Introduction to Algorithms*. 3. ed. Cambridge: The MIT Press / McGraw-Hill, 2009. Cap. 35: *The Traveling-Salesperson Problem*.
+A referência [1] citada neste capítulo encontra-se consolidada na Seção 8.2 do relatório.
