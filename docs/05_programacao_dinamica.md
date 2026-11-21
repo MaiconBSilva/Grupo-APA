@@ -7,14 +7,14 @@
 
 ## 5.1. Descrição do Paradigma, Subestrutura Ótima e Relação de Recorrência
 
-A **Programação Dinâmica (PD)** resolve problemas de otimização combinatória explorando duas propriedades estruturais fundamentais `[1, Cap. 15; 2, 5]`:
+A **Programação Dinâmica (PD)** resolve problemas de otimização combinatória explorando duas propriedades estruturais fundamentais [1, Cap. 15; 2, 5]:
 
 1. **Subestrutura ótima:** qualquer subcaminho de um ciclo hamiltoniano ótimo no Problema do Caixeiro Viajante (TSP) é, por si só, um caminho simples de custo mínimo entre suas extremidades sobre o mesmo conjunto intermediário de vértices.
 2. **Sobreposição de subproblemas:** diversas permutações distintas compartilham exatamente o mesmo conjunto de cidades já visitadas e a mesma cidade final. Ao memoizar o menor custo para cada par `(subconjunto, último vértice)`, evita-se recomputar exponencialmente os mesmos prefixos.
 
 ### Formulação Matemática (Bellman-Held-Karp)
 
-Proposta independentemente por Bellman `[6]` e por Held e Karp `[3]` em 1962, a formulação fixa sem perda de generalidade a cidade `0` como origem do ciclo e define o estado $C(S, v)$ como o **menor custo de um caminho simples** que:
+Proposta independentemente por Bellman [6] e por Held e Karp [3] em 1962, a formulação fixa sem perda de generalidade a cidade `0` como origem do ciclo e define o estado $C(S, v)$ como o **menor custo de um caminho simples** que:
 - inicia na cidade `0`;
 - visita exatamente o subconjunto de cidades $S \subseteq \{0, 1, \dots, n - 1\}$, com $0 \in S$ e $v \in S$;
 - termina na cidade $v \neq 0$.
@@ -256,7 +256,7 @@ Para cada cardinalidade $k = |S|$ com $2 \le k \le n$, existem $\binom{n - 1}{k 
 
 $$\text{Estados}(n) = \sum_{k=2}^{n} \binom{n - 1}{k - 1} (k - 1) = (n - 1) \sum_{m=1}^{n - 1} \binom{n - 2}{m - 1} = (n - 1) \cdot 2^{n - 2} = \Theta(n \cdot 2^n)$$
 
-As tabelas linearizadas `dp` e `parent` alocam $(n - 1) \cdot 2^{n - 1}$ posições, mantendo a ordem assintótica espacial de $\Theta(n \cdot 2^n)$ `[3, 5]`.
+As tabelas linearizadas `dp` e `parent` alocam $(n - 1) \cdot 2^{n - 1}$ posições, mantendo a ordem assintótica espacial de $\Theta(n \cdot 2^n)$ [3, 5].
 
 ### Complexidade de Tempo: $\Theta(n^2 \cdot 2^n)$
 
@@ -264,11 +264,11 @@ Nos estados de cardinalidade $k \ge 3$, para cada par $(S, v)$ há exatamente $(
 
 $$\text{Transições}(n) = \sum_{k=3}^{n} \binom{n - 1}{k - 1} (k - 1)(k - 2) = (n - 1)(n - 2) \sum_{m=2}^{n - 1} \binom{n - 3}{m - 2} = (n - 1)(n - 2) \cdot 2^{n - 3} = \Theta(n^2 \cdot 2^n)$$
 
-Somando os $(n - 1)$ casos base, as $(n - 1)$ verificações de fechamento do ciclo e os $O(n)$ passos de reconstrução da rota, a complexidade temporal assintótica do algoritmo de Bellman-Held-Karp é estritamente $\Theta(n^2 \cdot 2^n)$ `[3, 6]`.
+Somando os $(n - 1)$ casos base, as $(n - 1)$ verificações de fechamento do ciclo e os $O(n)$ passos de reconstrução da rota, a complexidade temporal assintótica do algoritmo de Bellman-Held-Karp é estritamente $\Theta(n^2 \cdot 2^n)$ [3, 6].
 
 ### Comparação Numérica com a Força Bruta
 
-Embora ainda exponencial, $\Theta(n^2 \cdot 2^n)$ representa uma redução drástica em relação ao crescimento fatorial $\Theta(n!)$ — ou $(n - 1)!$ permutações fixando a origem — da Força Bruta `[1, 2]`:
+Embora ainda exponencial, $\Theta(n^2 \cdot 2^n)$ representa uma redução drástica em relação ao crescimento fatorial $\Theta(n!)$ — ou $(n - 1)!$ permutações fixando a origem — da Força Bruta [1, 2]:
 
 - Para **$n = 12$**: $11! = 39.916.800$ rotas na Força Bruta contra apenas **$11.264$ estados** no Held-Karp (redução de $3.543\times$).
 - Para **$n = 16$**: $15! \approx 1{,}307 \times 10^{12}$ rotas contra **$245.760$ estados** (redução superior a $5{,}3 \times 10^6$ vezes).
@@ -293,13 +293,13 @@ Os valores abaixo foram obtidos diretamente pela execução da suíte `py -m src
 
 | Instância | $n$ | Custo Ótimo | Tempo (s) | Estados Memoizados | Transições Avaliadas |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| `tiny_4` | 4 | 226.30 | 0.000024 | 12 | 12 |
-| `small_6` | 6 | 147.14 | 0.000058 | 80 | 160 |
-| `small_8` | 8 | 277.32 | 0.000269 | 448 | 1.344 |
-| `medium_10` | 10 | 312.11 | 0.002123 | 2.304 | 9.216 |
-| `medium_12` | 12 | 280.79 | 0.009166 | 11.264 | 56.320 |
-| `medium_16` | 16 | 368.30 | 0.302392 | 245.760 | 1.720.320 |
-| `medium_20` | 20 | 379.34 | 6.572496 | 4.980.736 | 44.826.624 |
+| `tiny_4` | 4 | 226,30 | 0,000024 | 12 | 12 |
+| `small_6` | 6 | 147,14 | 0,000058 | 80 | 160 |
+| `small_8` | 8 | 277,32 | 0,000269 | 448 | 1.344 |
+| `medium_10` | 10 | 312,11 | 0,002123 | 2.304 | 9.216 |
+| `medium_12` | 12 | 280,79 | 0,009166 | 11.264 | 56.320 |
+| `medium_16` | 16 | 368,30 | 0,302392 | 245.760 | 1.720.320 |
+| `medium_20` | 20 | 379,34 | 6,572496 | 4.980.736 | 44.826.624 |
 
 ### Análise da Curva Empírica e Gargalo de Memória (*Memory Overhead*)
 
@@ -314,12 +314,4 @@ Diferentemente da Força Bruta e do Backtracking — que utilizam apenas $O(n)$ 
 
 Esses cálculos demonstram por que o limite prático `max_n = 20` adotado no *runner* comparativo do projeto é tecnicamente adequado e fundamentam os registros classificados como `"Estourou (RAM)"` para instâncias de médio/grande porte no Capítulo 7.
 
----
-
-## 5.5. Referências Bibliográficas
-
-- **[1]** CORMEN, T. H.; LEISERSON, C. E.; RIVEST, R. L.; STEIN, C. *Introduction to Algorithms*. 3. ed. Cambridge: The MIT Press / McGraw-Hill, 2009. (Cap. 15: *Dynamic Programming*; Cap. 35: *The Traveling-Salesperson Problem*).
-- **[2]** ZIVIANI, N. *Projeto de Algoritmos com implementações em Java e C++*. 1. ed. São Paulo: Cengage Learning (Thomson/Pioneira), 2006.
-- **[3]** HELD, M.; KARP, R. M. *A Dynamic Programming Approach to Sequencing Problems*. Journal of the Society for Industrial and Applied Mathematics (SIAM), v. 10, n. 1, p. 196–210, 1962.
-- **[5]** KLEINBERG, J.; TARDOS, É. *Algorithm Design*. Boston: Pearson / Addison-Wesley, 2006. (Cap. 6: *Dynamic Programming*).
-- **[6]** BELLMAN, R. *Dynamic Programming Treatment of the Travelling Salesman Problem*. Journal of the ACM (JACM), v. 9, n. 1, p. 61–63, 1962.
+As referências [1], [2], [3], [5] e [6] citadas neste capítulo encontram-se consolidadas na Seção 8.2 do relatório.

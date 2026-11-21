@@ -20,9 +20,19 @@ PAGE_BREAK = """
 
 <div style="page-break-after: always; break-after: page;"></div>
 
-\\newpage
-
 """
+
+
+def _clean_chapter_content(content: str) -> str:
+    """Remove metadados internos de status para o relatório final compilado."""
+    filtered_lines = []
+    for line in content.splitlines():
+        if line.strip().startswith("**Status:**"):
+            continue
+        if line.rstrip().endswith("**Status:** Concluído"):
+            continue
+        filtered_lines.append(line)
+    return "\n".join(filtered_lines)
 
 
 def build_final_report():
@@ -44,19 +54,20 @@ output: pdf_document
 {PAGE_BREAK}"""
     combined_content.append(header)
 
-    for chapter_filename in CHAPTERS_ORDER:
+    for idx, chapter_filename in enumerate(CHAPTERS_ORDER):
         chapter_path = DOCS_DIR / chapter_filename
         if chapter_path.exists():
             print(f" [+] Lendo {chapter_filename}")
-            content = chapter_path.read_text(encoding="utf-8")
+            content = _clean_chapter_content(chapter_path.read_text(encoding="utf-8"))
             combined_content.append(content)
-            combined_content.append(PAGE_BREAK)
+            if idx < len(CHAPTERS_ORDER) - 1:
+                combined_content.append(PAGE_BREAK)
         else:
             print(f" [!] Aviso: {chapter_filename} ainda não foi criado (será preenchido pelo integrante responsável).")
 
     OUTPUT_FILE.write_text("\n".join(combined_content), encoding="utf-8")
     print(f"\nDocumento final gerado com sucesso em: {OUTPUT_FILE}")
-    print("Dica: você pode converter para PDF usando Pandoc (`pandoc docs/Trabalho-Final-Completo.md -o docs/Trabalho-Final.pdf --pdf-engine=xelatex`) ou via extensão Markdown PDF no VSCode.")
+    print("Dica: você pode converter para PDF usando Pandoc (`pandoc docs/Trabalho-Final-Completo.md -o docs/Trabalho-Final.pdf --resource-path=docs --pdf-engine=xelatex`) ou via extensão Markdown PDF no VSCode.")
 
 
 if __name__ == "__main__":
