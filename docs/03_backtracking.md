@@ -198,10 +198,10 @@ class _BranchAndBoundSearch:
         Cota refinada:
             path_cost + menor aresta de `city` para R
                       + soma, para u em R, da menor aresta de u
-                        para (R - {u}) ∪ {0}.
+                        para R - {u} ou para a origem 0.
 
         Ambas valem porque o restante do ciclo usa exatamente uma aresta
-        saindo de cada cidade em {city} ∪ R, e cada aresta custa ao menos a
+        saindo de `city` e de cada cidade de R, e cada aresta custa ao menos a
         mínima permitida para a sua origem.
 
         Args:
@@ -425,7 +425,7 @@ Antes dos experimentos, o script confere a correção do algoritmo:
 | `small_8` | 8 | 277,32 | 49 | 162 | 5.040 | 13.700 | 0,000234 |
 | `medium_10` | 10 | 312,11 | 1.186 | 3.619 | 362.880 | 986.410 | 0,006137 |
 | `medium_12` | 12 | 280,79 | 1.827 | 8.873 | 39.916.800 | 108.505.112 | 0,013359 |
-| `medium_16` | 16 | 368,30 | 166.139 | 982.818 | 1.307.674.368.000 | 3.554.627.472.076 | 1,732759 |
+| `medium_16` | 16 | 368,30 | 166.139 | 982.818 | $1{,}31 \times 10^{12}$ | $3{,}55 \times 10^{12}$ | 1,732759 |
 
 A fração da árvore que precisa ser expandida cai rapidamente com $n$: metade da árvore em `tiny_4`, 0,12% em `medium_10` e cerca de 1 nó em cada 21 milhões em `medium_16`. Em instâncias pequenas, a árvore é rasa e sobra pouco para podar. Conforme $n$ cresce, cada poda perto da raiz elimina uma subárvore de tamanho fatorial.
 
@@ -450,9 +450,9 @@ Na mesma máquina, a Força Bruta do Capítulo 2 avaliou as $9! = 362.880$ rotas
 
 | $n$ | Rotas da Força Bruta | Tempo estimado da Força Bruta | Tempo medido do Branch & Bound |
 | :---: | :---: | :---: | :---: |
-| 12 | $11! \approx 4{,}0 \times 10^{7}$ | ≈ 23 s | 0,013 s |
-| 16 | $15! \approx 1{,}3 \times 10^{12}$ | ≈ 12 dias | 1,7 s |
-| 20 | $19! \approx 1{,}2 \times 10^{17}$ | ≈ 3.700 anos | ≈ 27 s |
+| 12 | $11! \approx 4{,}0 \times 10^{7}$ | $\approx$ 23 s | 0,013 s |
+| 16 | $15! \approx 1{,}3 \times 10^{12}$ | $\approx$ 12 dias | 1,7 s |
+| 20 | $19! \approx 1{,}2 \times 10^{17}$ | $\approx$ 3.700 anos | $\approx$ 27 s |
 
 Em `medium_20`, fora da tabela principal, o Branch & Bound expandiu 1.437.257 nós, fez 12.552.793 podas e encontrou o custo 379,34, o mesmo do Held-Karp, em cerca de 27 s. O script comparativo do grupo (`scripts/run_comparison.py`) limita o Branch & Bound a $n \le 16$ para manter o tempo total baixo.
 

@@ -105,10 +105,10 @@ class _BranchAndBoundSearch:
         Cota refinada:
             path_cost + menor aresta de `city` para R
                       + soma, para u em R, da menor aresta de u
-                        para (R - {u}) ∪ {0}.
+                        para R - {u} ou para a origem 0.
 
         Ambas valem porque o restante do ciclo usa exatamente uma aresta
-        saindo de cada cidade em {city} ∪ R, e cada aresta custa ao menos a
+        saindo de `city` e de cada cidade de R, e cada aresta custa ao menos a
         mínima permitida para a sua origem.
 
         Args:
